@@ -112,7 +112,7 @@ Let minimum pump flow be **1 L/m** and $T$ be the time taken to fill the Tank,
 
 \begin{align*}
 \therefore \: T &= \dfrac{40}{1} \times 60 \\
-& = 2400 \: seconds
+& = 2,400 \: seconds
 \end{align*}
 
 For the simplicity of calculations, let's assume the pump needs to be active for
@@ -132,7 +132,7 @@ During standby, for one day, the total Time Duration will be:
 
 \begin{align*}
 T_{Standby} &= 24 \times 60 \times 60 \\
-&= 86400 \: seconds
+&= 86,400 \: seconds
 \end{align*}
 
 ### Sensing
@@ -170,12 +170,12 @@ In the worst case scenario, we are assuming these things to be true:
 
 ### Pumping Water
 
-| | Active Components | Working Voltage (V) | Current Draw (A) | Power (W) | Time Duration (s) | Power x Duration (W.s) |
+| | Active Components | Working Voltage (V) | Current Draw (A) | Power (W) | Time Duration (s) | Power x Time (W.s) |
 |:- | :----- | :---: | :---: | :---: | :---: | :----: |
-| | Esp 32 | 3.3 V | 0.24 A | 0.8 W | 2400 s | 1920 W.s |
-| | Relay Board | 12 V | 0.05 A | 0.6 W | 2400 s | 1440 W.s |
-| | Hydraulic Pump | 12 V | 0.7 A | 8.4 W | 2400 s | 20160 W.s |
-| Total | | | | | | 23520 W.s |
+| | Esp 32 | 3.3 V | 0.24 A | 0.8 W | 2,400 s | 1,920 W.s |
+| | Relay Board | 12 V | 0.05 A | 0.6 W | 2,400 s | 1,440 W.s |
+| | Hydraulic Pump | 12 V | 0.7 A | 8.4 W | 2,400 s | 20,160 W.s |
+| Total | | | | | | 23,520 W.s |
 
 Table: Total Consumption during Pumping Water to the Tank. {#tbl:worstPumpingWatt}
 
@@ -186,19 +186,19 @@ is not included in this table.
 
 #### Standby
 
-| | Active Components | Working Voltage (V) | Current Draw (A) | Power (W) | Time Duration (s) | Power x Duration (W.s) |
+| | Active Components | Working Voltage (V) | Current Draw (A) | Power (W) | Time Duration (s) | Power x Time (W.s) |
 |:- | :----- | :---: | :---: | :---: | :---: | :----: |
-| | Esp 32 | 3.3 V | 0.02 A | 0.07 W | 86400 s | 5702.5 W.s |
-| | Relay Board I | 12 V | 0.01 A | 0.12 W | 86400 s | 10368 W.s |
-| | Relay Board II | 12 V | 0.01 A | 0.12 W | 86400 s | 10368 W.s |
-| | DHT 22 Sensor | 5 V | 0.0005 A | 0.0025 W | 86400 s | 216 W.s |
-| Total | | | | | | 26654 W.s |
+| | Esp 32 | 3.3 V | 0.02 A | 0.07 W | 86,400 s | 5,702.5 W.s |
+| | Relay Board I | 12 V | 0.01 A | 0.12 W | 86,400 s | 10,368 W.s |
+| | Relay Board II | 12 V | 0.01 A | 0.12 W | 86,400 s | 10,368 W.s |
+| | DHT 22 Sensor | 5 V | 0.0005 A | 0.0025 W | 86,400 s | 216 W.s |
+| Total | | | | | | 26,654 W.s |
 
 Table: Total Consumption during the Standby Time for a day. {#tbl:worstStandbyWatt}
 
 #### Sensing
 
-| | Active Components | Working Voltage (V) | Current Draw (A) | Power (W) | Time Duration (s) | Power x Duration (W.s) |
+| | Active Components | Working Voltage (V) | Current Draw (A) | Power (W) | Time Duration (s) | Power x Time (W.s) |
 |:- | :----- | :---: | :---: | :---: | :---: | :----: |
 | | Esp 32 | 3.3 V | 0.24 A | 0.8 W | 480 s | 380 W.s |
 | | DHT 22 Sensor | 5 V | 0.002 A | 0.01 W | 480 s | 4.8 W.s |
@@ -208,15 +208,28 @@ Table: Total Consumption during the Sensing Time for a day. {#tbl:worstSensingWa
 
 #### Watering
 
-| | Active Components | Working Voltage (V) | Current Draw (A) | Power (W) | Time Duration (s) | Power x Duration (W.s) |
+| | Active Components | Working Voltage (V) | Current Draw (A) | Power (W) | Time Duration (s) | Power x Time (W.s) |
 |:- | :----- | :---: | :---: | :---: | :---: | :----: |
 | | Esp 32 | 3.3 V | 0.24 A | 0.8 W | 160 s | 130 W.s |
-| | Solenoid Valve | 12 V | 0.600 A | 7.2 W | 160 s | 1152 W.s |
+| | Solenoid Valve | 12 V | 0.600 A | 7.2 W | 160 s | 1,152 W.s |
 | | Relay Board | 12 V | 0.05 A | 0.6 W | 160 s | 100 W.s |
-| Total | | | | | | 1252 W.s |
+| Total | | | | | | 1,252 W.s |
 
 Table: Total Consumption during the Watering Time for a day. {#tbl:worstWateringWatt}
 
 #### Final Per Day Consumption
 
-| |
+\begin{align*}
+\mbox{Final Worst Case Per Day Consumption} &= \mbox{Standby} + \mbox{Sensing} + \mbox{Watering} \\
+&= 26,654 + 385 + 1,252 \\
+&= 28,291 \: \mbox{W.s}
+\end{align*}
+
+### Final Per Cycle Consumption
+
+\begin{align*}
+\mbox{Final Worst Case Per Cycle Consumption} &= \mbox{Pumping} + (10 \times \mbox{Per Day}) \\
+&= 23,520 + (10 \times 28,291) \\
+&= 23,520 + 282,910 \\
+&= 306,430 \: \mbox{W.s}
+\end{align*}
