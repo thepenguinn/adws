@@ -37,7 +37,8 @@ A single Duty Cycle consist of:
 
 | Mode | Description | Current Draw | Unit |
 | :----- | :---------- | ---: | ---: |
-| Active Mode | Basically everything is active including Wifi and Bluetooth. | ~ 240 | mA |
+| Active Mode I | Basically everything is active including Wifi and Bluetooth. Esp is acting as a WiFi Hotspot | ~ 240 | mA |
+| Active Mode II | Basically everything is active including Wifi and Bluetooth. Esp is acting as a WiFi Reciver | ~ 160 | mA |
 | Modem Sleep Mode | Wifi and Bluetooth are inactive and everything else is active. | ~ 20 | mA |
 | Sleep Mode | Esp Core Processor is inactive, RAM is active and ULP is active. | ~ 1 | mA |
 
@@ -166,7 +167,7 @@ T_{Watering} &= 4 \times 4 \times 10 \\
 
 In the worst case scenario, we are assuming these things to be true:
 
-- Esp 32 is in **Active Mode**, while we are doing something, and in **Modem Sleep Mode**, while during Standby.
+- Esp 32 is in **Active Mode I**, while we are doing something, and in **Modem Sleep Mode**, while during Standby.
 
 ### Pumping Water
 
@@ -213,7 +214,7 @@ Table: Total Consumption during the Sensing Time for a day. {#tbl:worstSensingWa
 | | Esp 32 | 3.3 V | 0.24 A | 0.8 W | 160 s | 130 W.s |
 | | Solenoid Valve | 12 V | 0.600 A | 7.2 W | 160 s | 1,152 W.s |
 | | Relay Board | 12 V | 0.05 A | 0.6 W | 160 s | 100 W.s |
-| Total | | | | | | 1,252 W.s |
+| Total | | | | | | 1,382 W.s |
 
 Table: Total Consumption during the Watering Time for a day. {#tbl:worstWateringWatt}
 
@@ -221,8 +222,138 @@ Table: Total Consumption during the Watering Time for a day. {#tbl:worstWatering
 
 \begin{align*}
 \mbox{Final Worst Case Per Day Consumption} &= \mbox{Standby} + \mbox{Sensing} + \mbox{Watering} \\
+&= 26,654 + 385 + 1,382 \\
+&= 28,421 \: \mbox{W} \cdot \mbox{s}
+\end{align*}
+
+### Final Per Cycle Consumption
+
+\begin{align*}
+\mbox{Final Worst Case Per Cycle Consumption} &= \mbox{Pumping} + (10 \times \mbox{Per Day}) \\
+&= 23,520 + (10 \times 28,421) \\
+&= 23,520 + 284,910 \\
+&= 306,430 \: \mbox{W} \cdot \mbox{s}
+\end{align*}
+
+### Power Output of a 12 V 1 AH Battery
+
+\begin{align*}
+\mbox{Total Watt Hours, battery can output} &= 12 \times 1 \\
+&= 12 \: \mbox{W} \cdot \mbox{H} \\ \\
+\mbox{Total Watt seconds, battery can output} &= \mbox{Total Watt Hours} \times 60 \times 60 \\
+&= 12 \times 60 \times 60 \\
+&= 43,200 \: \mbox{W} \cdot \mbox{s}
+\end{align*}
+
+Clearly the per cycle demand, $306,430 \: \mbox{W} \cdot \mbox{s}$ is much **larger** than
+what this battery can provide, $43,200 \: \mbox{W} \cdot \mbox{s}$.
+
+Let's see how long this battery will be able to hold,
+
+\begin{align*}
+\mbox{Pumping water is inevitable in a single Duty Cycle.} \\
+\therefore \mbox{Watt seconds available for the rest of the Cycle} &= \mbox{Total Output} - \mbox{Pumping Water} \\
+&= 43,200 - 23,520 \\
+&= 19,680 \: \mbox{W} \cdot \mbox{s}
+\end{align*}
+
+\begin{align*}
+\mbox{Total days this battery can last} &= \dfrac{\mbox{Rest of the Energy Available}}{\mbox{Per Day Consumption}} \\
+&= \dfrac{19,680}{28,291} \\
+&= 0.7 \: \mbox{Days} \: (\approx 16.8 \: \mbox{Hours})
+\end{align*}
+
+### Power Output of a 12 V 5 AH Battery
+
+\begin{align*}
+\mbox{Total Watt Hours, battery can output} &= 12 \times 5 \\
+&= 60 \: \mbox{W} \cdot \mbox{H} \\ \\
+\mbox{Total Watt seconds, battery can output} &= \mbox{Total Watt Hours} \times 60 \times 60 \\
+&= 60 \times 60 \times 60 \\
+&= 216,000 \: \mbox{W} \cdot \mbox{s}
+\end{align*}
+
+Clearly the per cycle demand, $306,430 \: \mbox{W} \cdot \mbox{s}$ is much **larger** than
+what this battery can provide, $216,000 \: \mbox{W} \cdot \mbox{s}$.
+
+Let's see how long this battery will be able to hold,
+
+\begin{align*}
+\mbox{Pumping water is inevitable in a single Duty Cycle.} \\
+\therefore \mbox{Watt seconds available for the rest of the Cycle} &= \mbox{Total Output} - \mbox{Pumping Water} \\
+&= 216,000 - 23,520 \\
+&= 192,480 \: \mbox{W} \cdot \mbox{s}
+\end{align*}
+
+\begin{align*}
+\mbox{Total days this battery can last} &= \dfrac{\mbox{Rest of the Energy Available}}{\mbox{Per Day Consumption}} \\
+&= \dfrac{192,480}{28,291} \\
+&= 6.8 \: \mbox{Days} \: (\approx 6 \: \mbox{Days and} \: 19.2 \: \mbox{Hours})
+\end{align*}
+
+## Ideal Case Scenario
+
+### Assumptions
+
+In the ideal case scenario, we are assuming these things to be true:
+
+- Esp 32 is in **Active Mode II**, while we are doing something, and in **Sleep Mode**, while during Standby.
+
+### Pumping Water
+
+| | Active Components | Working Voltage (V) | Current Draw (A) | Power (W) | Time Duration (s) | Power x Time (W.s) |
+|:- | :----- | :---: | :---: | :---: | :---: | :----: |
+| | Esp 32 | 3.3 V | 0.16 A | 0.528 W | 2,400 s | 1,267 W.s |
+| | Relay Board | 12 V | 0.05 A | 0.6 W | 2,400 s | 1,440 W.s |
+| | Hydraulic Pump | 12 V | 0.7 A | 8.4 W | 2,400 s | 20,160 W.s |
+| Total | | | | | | 22,867 W.s |
+
+Table: Total Consumption during Pumping Water to the Tank. {#tbl:idealPumpingWatt}
+
+NOTE: Power Consumed by the **Sensor** and the other **Relay Board** during their standby mode
+is not included in this table.
+
+### Per Day Consumption
+
+#### Standby
+
+| | Active Components | Working Voltage (V) | Current Draw (A) | Power (W) | Time Duration (s) | Power x Time (W.s) |
+|:- | :----- | :---: | :---: | :---: | :---: | :----: |
+| | Esp 32 | 3.3 V | 0.001 A | 0.0033 W | 86,400 s | 285 W.s |
+| | Relay Board I | 12 V | 0.01 A | 0.12 W | 86,400 s | 10,368 W.s |
+| | Relay Board II | 12 V | 0.01 A | 0.12 W | 86,400 s | 10,368 W.s |
+| | DHT 22 Sensor | 5 V | 0.0005 A | 0.0025 W | 86,400 s | 216 W.s |
+| Total | | | | | | 21,237 W.s |
+
+Table: Total Consumption during the Standby Time for a day. {#tbl:idealStandbyWatt}
+
+#### Sensing
+
+| | Active Components | Working Voltage (V) | Current Draw (A) | Power (W) | Time Duration (s) | Power x Time (W.s) |
+|:- | :----- | :---: | :---: | :---: | :---: | :----: |
+| | Esp 32 | 3.3 V | 0.16 A | 0.528 W | 480 s | 254 W.s |
+| | DHT 22 Sensor | 5 V | 0.002 A | 0.01 W | 480 s | 4.8 W.s |
+| Total | | | | | | 258.8 W.s |
+
+Table: Total Consumption during the Sensing Time for a day. {#tbl:idealSensingWatt}
+
+#### Watering
+
+| | Active Components | Working Voltage (V) | Current Draw (A) | Power (W) | Time Duration (s) | Power x Time (W.s) |
+|:- | :----- | :---: | :---: | :---: | :---: | :----: |
+| | Esp 32 | 3.3 V | 0.16 A | 0.528 W | 160 s | 85 W.s |
+| | Solenoid Valve | 12 V | 0.600 A | 7.2 W | 160 s | 1,152 W.s |
+| | Relay Board | 12 V | 0.05 A | 0.6 W | 160 s | 100 W.s |
+| Total | | | | | | 1,337 W.s |
+
+Table: Total Consumption during the Watering Time for a day. {#tbl:idealWateringWatt}
+
+#### Final Per Day Consumption
+
+\begin{align*}
+\mbox{Final Worst Case Per Day Consumption} &= \mbox{Standby} + \mbox{Sensing} + \mbox{Watering} \\
 &= 26,654 + 385 + 1,252 \\
-&= 28,291 \: \mbox{W.s}
+&= 28,291 \: \mbox{W} \cdot \mbox{s}
 \end{align*}
 
 ### Final Per Cycle Consumption
@@ -231,5 +362,61 @@ Table: Total Consumption during the Watering Time for a day. {#tbl:worstWatering
 \mbox{Final Worst Case Per Cycle Consumption} &= \mbox{Pumping} + (10 \times \mbox{Per Day}) \\
 &= 23,520 + (10 \times 28,291) \\
 &= 23,520 + 282,910 \\
-&= 306,430 \: \mbox{W.s}
+&= 306,430 \: \mbox{W} \cdot \mbox{s}
+\end{align*}
+
+### Power Output of a 12 V 1 AH Battery
+
+\begin{align*}
+\mbox{Total Watt Hours, battery can output} &= 12 \times 1 \\
+&= 12 \: \mbox{W} \cdot \mbox{H} \\ \\
+\mbox{Total Watt seconds, battery can output} &= \mbox{Total Watt Hours} \times 60 \times 60 \\
+&= 12 \times 60 \times 60 \\
+&= 43,200 \: \mbox{W} \cdot \mbox{s}
+\end{align*}
+
+Clearly the per cycle demand, $306,430 \: \mbox{W} \cdot \mbox{s}$ is much **larger** than
+what this battery can provide, $43,200 \: \mbox{W} \cdot \mbox{s}$.
+
+Let's see how long this battery will be able to hold,
+
+\begin{align*}
+\mbox{Pumping water is inevitable in a single Duty Cycle.} \\
+\therefore \mbox{Watt seconds available for the rest of the Cycle} &= \mbox{Total Output} - \mbox{Pumping Water} \\
+&= 43,200 - 23,520 \\
+&= 19,680 \: \mbox{W} \cdot \mbox{s}
+\end{align*}
+
+\begin{align*}
+\mbox{Total days this battery can last} &= \dfrac{\mbox{Rest of the Energy Available}}{\mbox{Per Day Consumption}} \\
+&= \dfrac{19,680}{28,291} \\
+&= 0.7 \: \mbox{Days} \: (\approx 16.8 \: \mbox{Hours})
+\end{align*}
+
+### Power Output of a 12 V 5 AH Battery
+
+\begin{align*}
+\mbox{Total Watt Hours, battery can output} &= 12 \times 5 \\
+&= 60 \: \mbox{W} \cdot \mbox{H} \\ \\
+\mbox{Total Watt seconds, battery can output} &= \mbox{Total Watt Hours} \times 60 \times 60 \\
+&= 60 \times 60 \times 60 \\
+&= 216,000 \: \mbox{W} \cdot \mbox{s}
+\end{align*}
+
+Clearly the per cycle demand, $306,430 \: \mbox{W} \cdot \mbox{s}$ is much **larger** than
+what this battery can provide, $216,000 \: \mbox{W} \cdot \mbox{s}$.
+
+Let's see how long this battery will be able to hold,
+
+\begin{align*}
+\mbox{Pumping water is inevitable in a single Duty Cycle.} \\
+\therefore \mbox{Watt seconds available for the rest of the Cycle} &= \mbox{Total Output} - \mbox{Pumping Water} \\
+&= 216,000 - 23,520 \\
+&= 192,480 \: \mbox{W} \cdot \mbox{s}
+\end{align*}
+
+\begin{align*}
+\mbox{Total days this battery can last} &= \dfrac{\mbox{Rest of the Energy Available}}{\mbox{Per Day Consumption}} \\
+&= \dfrac{192,480}{28,291} \\
+&= 6.8 \: \mbox{Days} \: (\approx 6 \: \mbox{Days and} \: 19.2 \: \mbox{Hours})
 \end{align*}
