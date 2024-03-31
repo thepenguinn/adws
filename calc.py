@@ -47,8 +47,8 @@ pump_worst = WattSecTable(2400, pump_worst_comp)
 
 standby_worst_comp = []
 standby_worst_comp.append(("Esp 32", 3.3, 0.02))
-standby_worst_comp.append(("Relay Board I", 12, 0.01))
-standby_worst_comp.append(("Relay Board II", 12, 0.01))
+standby_worst_comp.append(("Relay Board I", 12, 0.002))
+standby_worst_comp.append(("Relay Board II", 12, 0.002))
 standby_worst_comp.append(("DHT 22 Sensor", 5, 0.0005))
 standby_worst = WattSecTable(86400, standby_worst_comp)
 
@@ -75,8 +75,8 @@ pump_ideal = WattSecTable(2400, pump_ideal_comp)
 
 standby_ideal_comp = []
 standby_ideal_comp.append(("Esp 32", 3.3, 0.001))
-standby_ideal_comp.append(("Relay Board I", 12, 0.01))
-standby_ideal_comp.append(("Relay Board II", 12, 0.01))
+standby_ideal_comp.append(("Relay Board I", 12, 0.002))
+standby_ideal_comp.append(("Relay Board II", 12, 0.002))
 standby_ideal_comp.append(("DHT 22 Sensor", 5, 0.0005))
 standby_ideal = WattSecTable(86400, standby_ideal_comp)
 
@@ -105,7 +105,7 @@ print(
         "\n" +
         "In the worst case scenario, we are assuming these things to be true:\n" +
         "\n" +
-        "- Esp 32 is in **Active Mode I**, while we are doing something, and in **Modem Sleep Mode**, while during Standby.\n" +
+        "- Esp 32 is in **Active Mode I**, while we are doing something, and in **Modem Sleep Mode**, while Standby.\n" +
         "\n" +
         "### Pumping Water\n" +
         "\n")
@@ -151,7 +151,7 @@ WORST_FIVE_EXP_PUMP = FIVE_AH_WS - pump_worst.total_watt_sec
 ##  Printing conclutions
 
 print(
-        "#### Final Per Day Consumption\n" +
+        "#### Final Worst Case Per Day Consumption\n" +
         "\n"
 "\\begin{align*}\n" +
     "\mbox{Final Worst Case Per Day Consumption} &= \mbox{Standby} + \mbox{Sensing} + \mbox{Watering} \\\\\n" +
@@ -161,7 +161,7 @@ print(
     "&= " + to_string(WORST_PER_DAY) + " \: \mbox{W} \cdot \mbox{s}\n" +
     "\end{align*}\n" +
     "\n" +
-    "### Final Per Cycle Consumption\n" +
+    "### Final Worst Case Per Cycle Consumption\n" +
     "\n" +
     "\\begin{align*}\n" +
     "\mbox{Final Worst Case Per Cycle Consumption} &= \mbox{Pumping} + (10 \\times \mbox{Per Day}) \\\\\n" +
@@ -170,7 +170,7 @@ print(
     "&= " + to_string(WORST_TOTAL_CYCLE) + " \: \mbox{W} \cdot \mbox{s}\n" +
     "\end{align*}\n" +
     "\n" +
-    "### Power Output of a 12 V 1 AH Battery\n" +
+    "### Backup available from a 12 V 1 AH Battery\n" +
     "\n" +
     "\\begin{align*}\n" +
     "\mbox{Total Watt Hours, battery can output} &= 12 \\times 1 \\\\\n" +
@@ -179,11 +179,11 @@ print(
     "&= 12 \\times 60 \\times 60 \\\\\n" +
     "&= " + to_string(ONE_AH_WS) + " \: \mbox{W} \cdot \mbox{s}\n" +
     "\end{align*}\n" +
+    "<++>\n" +
+    "Clearly the per cycle demand, **" + to_string(WORST_TOTAL_CYCLE) + "** $\mbox{W} \cdot \mbox{s}$ is much **larger** than\n" +
+    "what this battery can provide, **" + to_string(ONE_AH_WS) + "** $\mbox{W} \cdot \mbox{s}$.\n" +
     "\n" +
-    "Clearly the per cycle demand, $" + to_string(WORST_TOTAL_CYCLE) + " \: \mbox{W} \cdot \mbox{s}$ is much **larger** than\n" +
-    "what this battery can provide, $" + to_string(ONE_AH_WS) + " \: \mbox{W} \cdot \mbox{s}$.\n" +
-    "\n" +
-    "Let's see how long this battery will be able to hold,\n" +
+    "An approximate amount of backup will be,\n" +
     "\n" +
     "\\begin{align*}\n" +
     "\mbox{Pumping water is inevitable in a single Duty Cycle.} \\\\\n" +
@@ -195,10 +195,10 @@ print(
     "\\begin{align*}\n" +
     "\mbox{Total days this battery can last} &= \dfrac{\mbox{Rest of the Energy Available}}{\mbox{Per Day Consumption}} \\\\\n" +
     "&= \dfrac{" + to_string(WORST_ONE_EXP_PUMP) + "}{" + to_string(WORST_PER_DAY) + "} \\\\\n" +
-    "&= " + to_string(WORST_ONE_EXP_PUMP / WORST_PER_DAY) + " \: \mbox{Days} \: (\\approx <++> \: \mbox{Hours})\n" +
+    "&= " + to_string(WORST_ONE_EXP_PUMP / WORST_PER_DAY) + " \: \mbox{Days} \: (\\approx <++> \: \mbox{Days and} \: <++> \: \mbox{Hours})\n" +
     "\end{align*}\n" +
     "\n" +
-    "### Power Output of a 12 V 5 AH Battery\n" +
+    "### Backup available from a 12 V 5 AH Battery\n" +
     "\n" +
     "\\begin{align*}\n" +
     "\mbox{Total Watt Hours, battery can output} &= 12 \\times 5 \\\\\n" +
@@ -207,11 +207,11 @@ print(
     "&= 60 \\times 60 \\times 60 \\\\\n" +
     "&= " + to_string(FIVE_AH_WS) + " \: \mbox{W} \cdot \mbox{s}\n" +
     "\end{align*}\n" +
+    "<++>\n" +
+    "Clearly the per cycle demand, **" + to_string(WORST_TOTAL_CYCLE) + "** $\mbox{W} \cdot \mbox{s}$ is much **larger** than\n" +
+    "what this battery can provide, **" + to_string(FIVE_AH_WS) + "** $\mbox{W} \cdot \mbox{s}$.\n" +
     "\n" +
-    "Clearly the per cycle demand, $" + to_string(WORST_TOTAL_CYCLE) + " \: \mbox{W} \cdot \mbox{s}$ is much **larger** than\n" +
-    "what this battery can provide, $" + to_string(FIVE_AH_WS) + " \: \mbox{W} \cdot \mbox{s}$.\n" +
-    "\n" +
-    "Let's see how long this battery will be able to hold,\n" +
+    "An approximate amount of backup will be,\n" +
     "\n" +
     "\\begin{align*}\n" +
     "\mbox{Pumping water is inevitable in a single Duty Cycle.} \\\\\n" +
@@ -223,7 +223,7 @@ print(
     "\\begin{align*}\n" +
     "\mbox{Total days this battery can last} &= \dfrac{\mbox{Rest of the Energy Available}}{\mbox{Per Day Consumption}} \\\\\n" +
     "&= \dfrac{" + to_string(WORST_FIVE_EXP_PUMP) + "}{" + to_string(WORST_PER_DAY) + "} \\\\\n" +
-    "&= " + to_string(WORST_FIVE_EXP_PUMP / WORST_PER_DAY) + " \: \mbox{Days} \: (\\approx <++> \: \mbox{Hours})\n" +
+    "&= " + to_string(WORST_FIVE_EXP_PUMP / WORST_PER_DAY) + " \: \mbox{Days} \: (\\approx <++> \: \mbox{Days and} \: <++> \: \mbox{Hours})\n" +
     "\end{align*}\n")
 
 ## Printing Ideal
@@ -235,9 +235,9 @@ print(
         "\n" +
         "### Assumptions\n" +
         "\n" +
-        "In the worst case scenario, we are assuming these things to be true:\n" +
+        "In the ideal case scenario, we are assuming these things to be true:\n" +
         "\n" +
-        "- Esp 32 is in **Active Mode II**, while we are doing something, and in **Sleep Mode**, while during Standby.\n" +
+        "- Esp 32 is in **Active Mode II**, while we are doing something, and in **Sleep Mode**, while Standby.\n" +
         "\n" +
         "### Pumping Water\n" +
         "\n")
@@ -282,26 +282,26 @@ IDEAL_FIVE_EXP_PUMP = FIVE_AH_WS - pump_ideal.total_watt_sec
 ##  Printing conclutions
 
 print(
-        "#### Final Per Day Consumption\n" +
+        "#### Final Ideal Case Per Day Consumption\n" +
         "\n"
 "\\begin{align*}\n" +
-    "\mbox{Final Worst Case Per Day Consumption} &= \mbox{Standby} + \mbox{Sensing} + \mbox{Watering} \\\\\n" +
+    "\mbox{Final Ideal Case Per Day Consumption} &= \mbox{Standby} + \mbox{Sensing} + \mbox{Watering} \\\\\n" +
     "&= " + standby_ideal._get_total_wattsec() +
         " + " + sensing_ideal._get_total_wattsec() +
         " + " + watering_ideal._get_total_wattsec() + " \\\\\n" +
     "&= " + to_string(IDEAL_PER_DAY) + " \: \mbox{W} \cdot \mbox{s}\n" +
     "\end{align*}\n" +
     "\n" +
-    "### Final Per Cycle Consumption\n" +
+    "### Final Ideal Case Per Cycle Consumption\n" +
     "\n" +
     "\\begin{align*}\n" +
-    "\mbox{Final Worst Case Per Cycle Consumption} &= \mbox{Pumping} + (10 \\times \mbox{Per Day}) \\\\\n" +
+    "\mbox{Final Ideal Case Per Cycle Consumption} &= \mbox{Pumping} + (10 \\times \mbox{Per Day}) \\\\\n" +
     "&= " + to_string(pump_ideal.total_watt_sec) + " + (10 \\times " + to_string(IDEAL_PER_DAY) + ") \\\\\n" +
     "&= " + to_string(pump_ideal.total_watt_sec) + " + " + to_string(IDEAL_TOTAL_DAYS) + " \\\\\n" +
     "&= " + to_string(IDEAL_TOTAL_CYCLE) + " \: \mbox{W} \cdot \mbox{s}\n" +
     "\end{align*}\n" +
     "\n" +
-    "### Power Output of a 12 V 1 AH Battery\n" +
+    "### Backup available from a 12 V 1 AH Battery\n" +
     "\n" +
     "\\begin{align*}\n" +
     "\mbox{Total Watt Hours, battery can output} &= 12 \\times 1 \\\\\n" +
@@ -310,11 +310,11 @@ print(
     "&= 12 \\times 60 \\times 60 \\\\\n" +
     "&= " + to_string(ONE_AH_WS) + " \: \mbox{W} \cdot \mbox{s}\n" +
     "\end{align*}\n" +
+    "<++>\n" +
+    "Clearly the per cycle demand, **" + to_string(IDEAL_TOTAL_CYCLE) + "** $\mbox{W} \cdot \mbox{s}$ is much **larger** than\n" +
+    "what this battery can provide, **" + to_string(ONE_AH_WS) + "** $\mbox{W} \cdot \mbox{s}$.\n" +
     "\n" +
-    "Clearly the per cycle demand, $" + to_string(IDEAL_TOTAL_CYCLE) + " \: \mbox{W} \cdot \mbox{s}$ is much **larger** than\n" +
-    "what this battery can provide, $" + to_string(ONE_AH_WS) + " \: \mbox{W} \cdot \mbox{s}$.\n" +
-    "\n" +
-    "Let's see how long this battery will be able to hold,\n" +
+    "An approximate amount of backup will be,\n" +
     "\n" +
     "\\begin{align*}\n" +
     "\mbox{Pumping water is inevitable in a single Duty Cycle.} \\\\\n" +
@@ -326,10 +326,10 @@ print(
     "\\begin{align*}\n" +
     "\mbox{Total days this battery can last} &= \dfrac{\mbox{Rest of the Energy Available}}{\mbox{Per Day Consumption}} \\\\\n" +
     "&= \dfrac{" + to_string(IDEAL_ONE_EXP_PUMP) + "}{" + to_string(IDEAL_PER_DAY) + "} \\\\\n" +
-    "&= " + to_string(IDEAL_ONE_EXP_PUMP / IDEAL_PER_DAY) + " \: \mbox{Days} \: (\\approx <++> \: \mbox{Hours})\n" +
+    "&= " + to_string(IDEAL_ONE_EXP_PUMP / IDEAL_PER_DAY) + " \: \mbox{Days} \: (\\approx <++> \: \mbox{Days and} \: <++> \: \mbox{Hours})\n" +
     "\end{align*}\n" +
     "\n" +
-    "### Power Output of a 12 V 5 AH Battery\n" +
+    "### Backup available from a 12 V 5 AH Battery\n" +
     "\n" +
     "\\begin{align*}\n" +
     "\mbox{Total Watt Hours, battery can output} &= 12 \\times 5 \\\\\n" +
@@ -338,21 +338,21 @@ print(
     "&= 60 \\times 60 \\times 60 \\\\\n" +
     "&= " + to_string(FIVE_AH_WS) + " \: \mbox{W} \cdot \mbox{s}\n" +
     "\end{align*}\n" +
+    "<++>\n" +
+    "Clearly the per cycle demand, **" + to_string(IDEAL_TOTAL_CYCLE) + "** $\mbox{W} \cdot \mbox{s}$ is much **larger** than\n" +
+    "what this battery can provide, **" + to_string(FIVE_AH_WS) + "** $\mbox{W} \cdot \mbox{s}$.\n" +
     "\n" +
-    "Clearly the per cycle demand, $" + to_string(IDEAL_TOTAL_CYCLE) + " \: \mbox{W} \cdot \mbox{s}$ is much **larger** than\n" +
-    "what this battery can provide, $" + to_string(FIVE_AH_WS) + " \: \mbox{W} \cdot \mbox{s}$.\n" +
-    "\n" +
-    "Let's see how long this battery will be able to hold,\n" +
+    "An approximate amount of backup will be,\n" +
     "\n" +
     "\\begin{align*}\n" +
     "\mbox{Pumping water is inevitable in a single Duty Cycle.} \\\\\n" +
     "\\therefore \mbox{Watt seconds available for the rest of the Cycle} &= \mbox{Total Output} - \mbox{Pumping Water} \\\\\n" +
-    "&= " + to_string(FIVE_AH_WS) + " - " + to_string(pump_worst.total_watt_sec) + " \\\\\n" +
+    "&= " + to_string(FIVE_AH_WS) + " - " + to_string(pump_ideal.total_watt_sec) + " \\\\\n" +
     "&= " + to_string(IDEAL_FIVE_EXP_PUMP) + " \: \mbox{W} \cdot \mbox{s}\n" +
     "\end{align*}\n" +
     "\n" +
     "\\begin{align*}\n" +
     "\mbox{Total days this battery can last} &= \dfrac{\mbox{Rest of the Energy Available}}{\mbox{Per Day Consumption}} \\\\\n" +
     "&= \dfrac{" + to_string(IDEAL_FIVE_EXP_PUMP) + "}{" + to_string(IDEAL_PER_DAY) + "} \\\\\n" +
-    "&= " + to_string(IDEAL_FIVE_EXP_PUMP / IDEAL_PER_DAY) + " \: \mbox{Days} \: (\\approx <++> \: \mbox{Hours})\n" +
+    "&= " + to_string(IDEAL_FIVE_EXP_PUMP / IDEAL_PER_DAY) + " \: \mbox{Days} \: (\\approx <++> \: \mbox{Days and} \: <++> \: \mbox{Hours})\n" +
     "\end{align*}\n")
