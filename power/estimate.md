@@ -110,7 +110,7 @@ Power Consumption during a single Duty Cycle can be split into two parts:
 
 This is need to be done once during a Duty Cycle.
 
-Let minimum pump flow be **1 L/m** and $T$ be the time taken to fill the Tank,
+Let the minimum pump flow be **1 L/m** and $T$ be the time taken to fill the Tank,
 
 \begin{align*}
 \therefore \: T &= \dfrac{40}{1} \times 60 \\
