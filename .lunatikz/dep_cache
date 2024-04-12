@@ -1,0 +1,62 @@
+return {
+    ["spicesp"] = {
+        ["default_build_child_nodes"] = {
+            ["epicesp"] = true,
+        },
+        ["parent_nodes"] = {
+        },
+        ["child_nodes"] = {
+            ["epicesp"] = true,
+        },
+        ["lmodt"] = 1712826538,
+    },
+    ["endtest"] = {
+        ["parent_nodes"] = {
+            ["subtest"] = true,
+        },
+        ["style"] = "default",
+        ["lmodt"] = 1711953684,
+    },
+    ["epicesp"] = {
+        ["parent_nodes"] = {
+            ["spicesp"] = true,
+        },
+        ["style"] = "default",
+        ["lmodt"] = 1712842796,
+    },
+    ["epicpowerconsumptionblock"] = {
+        ["parent_nodes"] = {
+        },
+        ["style"] = "default",
+        ["lmodt"] = 1711891230,
+    },
+    ["subtest"] = {
+        ["default_build_child_nodes"] = {
+            ["endtest"] = true,
+        },
+        ["parent_nodes"] = {
+        },
+        ["child_nodes"] = {
+            ["endtest"] = true,
+        },
+        ["lmodt"] = 1711953162,
+    },
+    ["epicrelay"] = {
+        ["parent_nodes"] = {
+            ["spicrelay"] = true,
+        },
+        ["style"] = "default",
+        ["lmodt"] = 1712922096,
+    },
+    ["spicrelay"] = {
+        ["default_build_child_nodes"] = {
+            ["epicrelay"] = true,
+        },
+        ["parent_nodes"] = {
+        },
+        ["child_nodes"] = {
+            ["epicrelay"] = true,
+        },
+        ["lmodt"] = 1712922137,
+    },
+}

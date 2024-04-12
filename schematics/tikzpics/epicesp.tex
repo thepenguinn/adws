@@ -1,5 +1,13 @@
 \begin{tikzpicture}
     \draw
-    \spicesp {first} {vin}
+    \spicesp {first} {en}
+    ;
+    \draw [rounded corners = 3mm]
+    %% connecting vin and d5
+    (first-d5) ++(1,0) coordinate (rightvrt)
+    (first-vin) ++(0,-2) coordinate (botheight)
+    (first-vin) -- ++(-1,0)
+    -- ++(0,-2) -- (botheight-|rightvrt)
+    -- (rightvrt) -- (first-d5)
     ;
 \end{tikzpicture}

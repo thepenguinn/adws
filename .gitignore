@@ -1,7 +1,7 @@
 *.pdf
-test.py
 *.aux
 *.log
 *.tstp
 *.toc
+test.py
 test.tex

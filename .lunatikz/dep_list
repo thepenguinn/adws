@@ -1,0 +1,17 @@
+return {
+    ["spicesp"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["epicpowerconsumptionblock"] = {
+        ["parent_dir"] = "power/tikzpics",
+    },
+    ["spicrelay"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["epicesp"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["epicrelay"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+}

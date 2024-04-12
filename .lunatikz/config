@@ -1,0 +1,6 @@
+return {
+    ["pics.directory"] = "tikzpics",
+    ["touch"] = true,
+    ["pics.skip"] = true,
+    ["margin"] = "4cm",
+}
