@@ -1,0 +1,130 @@
+\def\relayHeight{5}
+\def\relayWidth{4}
+\def\relayOutPinHoleThickness{0.125}
+\def\relayInPinHoleThickness{0.07}
+
+\ctikzsubcircuitdef{spicrelay} {
+    com1, com2, nc1, nc2, no1, no2,
+    vcc1, vcc2, gnd1, gnd2, in1, in2, vr%
+} {
+    coordinate (#1-origin)
+    ++(2,-2.5)
+    node [inner sep = 0pt, anchor = center] {
+        \begin{tikzpicture}
+            \draw [rounded corners = 3mm, very thick]
+            (0,0) coordinate (origin)
+            (origin) rectangle (\relayWidth,-\relayHeight)
+            ;
+            %% two relays
+            \draw [semithick, rounded corners = 0.5mm]
+            (origin) ++(0.25,-1)
+            -- ++(1.4,0) -- ++(0.225,-0.4)
+            -- ++(0,-1.9)
+            -- ++(-1.4,0) -- ++(-0.225,0.4)
+            -- cycle
+            ;
+            \draw [semithick, rounded corners = 0.5mm]
+            (origin) ++(0.25,-1) ++(1.875,0)
+            -- ++(1.4,0) -- ++(0.225,-0.4)
+            -- ++(0,-1.9)
+            -- ++(-1.4,0) -- ++(-0.225,0.4)
+            -- cycle
+            ;
+            %% output bar
+            %% \draw [rounded corners = 1mm]
+            %% (origin) ++(0.25,-0.25)
+            %% coordinate (outbarstart)
+            %% (origin) ++(\relayWidth,0) ++(-0.25,-0.75)
+            %% coordinate (outbarend)
+            %% (outbarstart) rectangle (outbarend)
+            %% ;
+            %% output pins
+            \draw [semithick]
+            (origin) (\relayWidth,0) coordinate (rightend)
+            ($(origin)!0.50!(rightend)$) coordinate (mid)
+            ($(origin)!0.50!(mid)$) ++(0,-0.4) coordinate (first)
+            ($(mid)!0.50!(rightend)$) ++(0,-0.4) coordinate (second)
+            %% first
+            (0,-0.3) coordinate (outnodeoff)
+            (first) circle (\relayOutPinHoleThickness)
+            ++(outnodeoff) node [
+                font = \tiny, scale = 0.8, above = 0pt
+            ] {\texttt{COM}}
+            (first) ++(0.5,0) circle (\relayOutPinHoleThickness)
+            ++(outnodeoff) node [
+                font = \tiny, scale = 0.8, above = 0pt
+            ] {\texttt{NC}}
+            (first) ++(-0.5,0) circle (\relayOutPinHoleThickness)
+            ++(outnodeoff) node [
+                font = \tiny, scale = 0.8, above = 0pt
+            ] {\texttt{NO}}
+            %% second
+            (second) circle (\relayOutPinHoleThickness)
+            ++(outnodeoff) node [
+                font = \tiny, scale = 0.8, above = 0pt
+            ] {\texttt{COM}}
+            (second) ++(0.5,0) circle (\relayOutPinHoleThickness)
+            ++(outnodeoff) node [
+                font = \tiny, scale = 0.8, above = 0pt
+            ] {\texttt{NC}}
+            (second) ++(-0.5,0) circle (\relayOutPinHoleThickness)
+            ++(outnodeoff) node [
+                font = \tiny, scale = 0.8, above = 0pt
+            ] {\texttt{NO}}
+            ;
+            %% input pins
+            \foreach \x/\y in {0.5/GND, 0.9/IN2, 1.3/IN1, 1.7/VCC} {
+                \draw [semithick]
+                (origin) ++(0,-\relayHeight) ++(\x,0.25)
+                circle (\relayInPinHoleThickness)
+                ++(0,0.25) node [
+                    below = 0pt, font = \tiny, scale = 0.8
+                ]{\texttt{\y}}
+                ;
+            }
+            \foreach \x/\y in {0.5/VR, 0.9/VCC, 1.3/GND} {
+                \draw [semithick]
+                (origin) ++(\relayWidth,-\relayHeight) ++(-\x,0.25)
+                circle (\relayInPinHoleThickness)
+                ++(0,0.25) node [
+                    below = 0pt, font = \tiny, scale = 0.8
+                ]{\texttt{\y}}
+                ;
+            }
+            %% ICs
+            \draw [rounded corners = 1mm, semithick]
+            (origin) ++(\relayWidth,-\relayHeight)
+            ++(-0.25,1.5) ++(-0.25,0)
+            rectangle ++(-0.5,-.75)
+            ;
+            \draw [rounded corners = 1mm, semithick]
+            (origin) ++(\relayWidth,-\relayHeight)
+            ++(-0.25,1.5) ++(-1.875,0) ++(-0.25,0)
+            rectangle ++(-0.5,-.75)
+            ;
+        \end{tikzpicture}
+    }
+    (#1-origin)
+    (\relayWidth,0) coordinate (#1-rightend)
+    ($(#1-origin)!0.50!(#1-rightend)$) coordinate (#1-mid)
+    ($(#1-origin)!0.50!(#1-mid)$) coordinate (#1-com1)
+    ($(#1-mid)!0.50!(#1-rightend)$) coordinate (#1-com2)
+    %% first out
+    (#1-com1) ++(0.5,0) coordinate (#1-nc1)
+    (#1-com1) ++(-0.5,0) coordinate (#1-no1)
+    %% second out
+    (#1-com2) ++(0.5,0) coordinate (#1-nc2)
+    (#1-com2) ++(-0.5,0) coordinate (#1-no2)
+    %% inputs
+    (#1-origin) ++(0,-\relayHeight)
+    ++(0.5,0) coordinate (#1-gnd1)
+    ++(0.4,0) coordinate (#1-in2)
+    ++(0.4,0) coordinate (#1-in1)
+    ++(0.4,0) coordinate (#1-vcc1)
+    (#1-origin) ++(\relayWidth,-\relayHeight)
+    ++(-0.5,0) coordinate (#1-vr)
+    ++(-0.4,0) coordinate (#1-vcc2)
+    ++(-0.4,0) coordinate (#1-gnd2)
+}
+
+\ctikzsubcircuitactivate{spicrelay}
