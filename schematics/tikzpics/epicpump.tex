@@ -1,0 +1,13 @@
+\begin{tikzpicture}
+    \draw
+    \spicpump {first} {vcc}
+    ;
+    \draw [rounded corners = 1mm]
+    (first-vcc)
+    ++(0,-1) coordinate (lol)
+    (first-vcc)
+    -- (lol)
+    -- (lol-|first-gnd)
+    -- (first-gnd)
+    ;
+\end{tikzpicture}
