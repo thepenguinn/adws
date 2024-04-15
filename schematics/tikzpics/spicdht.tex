@@ -9,6 +9,9 @@
 \def\dhtPinHoleThickness{0.07}
 
 \ctikzsubcircuitdef{spicdht} {
+    north, south, east, west,
+    northeast, northwest, southeast, southwest,
+    center,
     p1, p2, p3%
 } {
     coordinate (#1-origin)
@@ -87,6 +90,9 @@
     coordinate (#1-p2)
     (#1-p2) ++(0.3,0) coordinate (#1-p1)
     (#1-p2) ++(-0.3,0) coordinate (#1-p3)
+    \markgeocoordinate {#1}
+    {(#1-origin)} {(#1-origin) ++({\dhtSensorWidth},{(-\dhtSensorHight-\dhtBoardHeight)})}
+    {(#1-origin)} {(#1-origin) ++({\dhtSensorWidth},{(-\dhtSensorHight-\dhtBoardHeight)})}
 }
 
 \ctikzsubcircuitactivate{spicdht}
