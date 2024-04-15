@@ -4,6 +4,9 @@
 \def\relayInPinHoleThickness{0.07}
 
 \ctikzsubcircuitdef{spicrelay} {
+    north, south, east, west,
+    northeast, northwest, southeast, southwest,
+    center,
     com1, com2, nc1, nc2, no1, no2,
     vcc1, vcc2, gnd1, gnd2, in1, in2, vr%
 } {
@@ -125,6 +128,9 @@
     ++(-0.5,0) coordinate (#1-vr)
     ++(-0.4,0) coordinate (#1-vcc2)
     ++(-0.4,0) coordinate (#1-gnd2)
+    \markgeocoordinate {#1}
+    {(#1-origin)} {(#1-origin) ++(4,-5)}
+    {(#1-origin)} {(#1-origin) ++(4,-5)}
 }
 
 \ctikzsubcircuitactivate{spicrelay}
