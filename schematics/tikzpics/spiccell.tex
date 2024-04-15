@@ -5,6 +5,9 @@
 \def\cellPosHeight{0.1}
 
 \ctikzsubcircuitdef{spiccell} {
+    north, south, east, west,
+    northeast, northwest, southeast, southwest,
+    center,
     p, n%
 } {
     coordinate (#1-origin)
@@ -32,6 +35,13 @@
     }
     (#1-origin) ++({\cellWidth/2},0) coordinate (#1-p)
     ++(0,{-\cellHeight-\cellPosHeight}) coordinate (#1-n)
+    \markgeocoordinate {#1}
+    {(#1-origin)} {
+        (#1-origin) ++({\cellWidth},{(-\cellHeight-\cellPosHeight)})
+    }
+    {(#1-origin)} {
+        (#1-origin) ++({\cellWidth},{(-\cellHeight-\cellPosHeight)})
+    }
 }
 
 \ctikzsubcircuitactivate{spiccell}
