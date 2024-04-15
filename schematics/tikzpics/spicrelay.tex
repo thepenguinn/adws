@@ -43,7 +43,7 @@
             %% ;
             %% output pins
             \draw [semithick]
-            (origin) (\relayWidth,0) coordinate (rightend)
+            (origin) ++(\relayWidth,0) coordinate (rightend)
             ($(origin)!0.50!(rightend)$) coordinate (mid)
             ($(origin)!0.50!(mid)$) ++(0,-0.4) coordinate (first)
             ($(mid)!0.50!(rightend)$) ++(0,-0.4) coordinate (second)
@@ -107,8 +107,7 @@
             ;
         \end{tikzpicture}
     }
-    (#1-origin)
-    (\relayWidth,0) coordinate (#1-rightend)
+    (#1-origin) ++(\relayWidth,0) coordinate (#1-rightend)
     ($(#1-origin)!0.50!(#1-rightend)$) coordinate (#1-mid)
     ($(#1-origin)!0.50!(#1-mid)$) coordinate (#1-com1)
     ($(#1-mid)!0.50!(#1-rightend)$) coordinate (#1-com2)
