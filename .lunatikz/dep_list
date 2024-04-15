@@ -1,47 +1,53 @@
 return {
-    ["epicpanel"] = {
+    ["epiccell"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
     ["epicpowerconsumptionblock"] = {
         ["parent_dir"] = "power/tikzpics",
     },
-    ["spicpanel"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
-    ["spicbms"] = {
+    ["epicesp"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
     ["epicpump"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
-    ["epicbms"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
-    ["spicesp"] = {
+    ["spicpanel"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
     ["epicdht"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
-    ["spicsolenoid"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
-    ["epicesp"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
-    ["spicpump"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
-    ["spicdht"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
-    ["spicrelay"] = {
+    ["epicsolenoid"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
     ["epicrelay"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
-    ["epicsolenoid"] = {
+    ["epicbms"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["epicpanel"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["spiccell"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["spicesp"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["spicpump"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["spicsolenoid"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["spicbms"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["spicrelay"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["spicdht"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
 }
