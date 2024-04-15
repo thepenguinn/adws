@@ -1,12 +1,24 @@
 return {
-    ["epicrelay"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
-    ["spicrelay"] = {
+    ["epicpanel"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
     ["epicpowerconsumptionblock"] = {
         ["parent_dir"] = "power/tikzpics",
+    },
+    ["spicpanel"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["spicbms"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["epicpump"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["epicbms"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["spicesp"] = {
+        ["parent_dir"] = "schematics/tikzpics",
     },
     ["epicdht"] = {
         ["parent_dir"] = "schematics/tikzpics",
@@ -14,19 +26,19 @@ return {
     ["spicsolenoid"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
-    ["spicdht"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
     ["epicesp"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
-    ["spicesp"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
     ["spicpump"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
-    ["epicpump"] = {
+    ["spicdht"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["spicrelay"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["epicrelay"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
     ["epicsolenoid"] = {
