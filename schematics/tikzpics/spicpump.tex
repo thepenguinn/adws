@@ -6,6 +6,9 @@
 \def\pumpPinHoleThickness{0.07}
 
 \ctikzsubcircuitdef{spicpump} {
+    north, south, east, west,
+    northeast, northwest, southeast, southwest,
+    center,
     vcc, gnd%
 } {
     coordinate (#1-origin)
@@ -85,6 +88,9 @@
     (#1-origin) ++(0,{-\pumpMotorHeight+1.5}) ++(\pumpBoardWidth,-\pumpBoardHeight)
     ++(-0.5,0) coordinate (#1-gnd)
     ++(-0.5,0) coordinate (#1-vcc)
+    \markgeocoordinate {#1}
+    {(#1-origin)} {(#1-origin) ++(4,-4.5)}
+    {(#1-origin)} {(#1-origin) ++(4,-4.5)}
 }
 
 \ctikzsubcircuitactivate{spicpump}
