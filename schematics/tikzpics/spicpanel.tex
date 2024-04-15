@@ -16,12 +16,14 @@
 \def\panelPinHoleThickness{0.07}
 
 \ctikzsubcircuitdef{spicpanel} {
+    north, south, east, west,
+    northeast, northwest, southeast, southwest,
+    center,
     vcc, gnd%
 } {
     coordinate (#1-origin)
     ++(
     {((2*\panelPadX)+(2*\panelBtwX)+(3*\panelWidth))/2},
-    %% {((2*-\panelPadY)-(\panelBtwY)-(2*\panelHeight))/2}
     -{((2*\panelPadY)+(\panelBtwY)+(2*\panelHeight)+\panelBoardHeight)/2}
     )
     node [inner sep = 0pt, anchor = center] {
@@ -93,6 +95,19 @@
     )
     ++(0.5,-\panelBoardHeight) coordinate (#1-vcc)
     ++(0.5,0) coordinate (#1-gnd)
+    \markgeocoordinate {#1}
+    {(#1-origin)} {
+        (#1-origin) ++(
+        {((2*\panelPadX)+(2*\panelBtwX)+(3*\panelWidth))},
+        -{((2*\panelPadY)+(\panelBtwY)+(2*\panelHeight)+\panelBoardHeight)}
+        )
+    }
+    {(#1-origin)} {
+        (#1-origin) ++(
+        {((2*\panelPadX)+(2*\panelBtwX)+(3*\panelWidth))},
+        -{((2*\panelPadY)+(\panelBtwY)+(2*\panelHeight)+\panelBoardHeight)}
+        )
+    }
 }
 
 \ctikzsubcircuitactivate{spicpanel}
