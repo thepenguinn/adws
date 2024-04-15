@@ -6,6 +6,9 @@
 \def\espButtonThickness{0.1}
 
 \ctikzsubcircuitdef{spicesp}{
+    north, south, east, west,
+    northeast, northwest, southeast, southwest,
+    center,
     en, vp, vn, d34, d35, d32, d33, d25, d26, d27, d14, d12, d13, gnd, vin,
     d23, d22, tx0, rx0, d21, d19, d18, d5, tx2, rx2, d4, d2, d15, gnd, 3v3%
 } {
@@ -117,6 +120,9 @@
     (#1-origin) ++(\espWidth,-6.8) coordinate (#1-d15)
     (#1-origin) ++(\espWidth,-7.3) coordinate (#1-gnd)
     (#1-origin) ++(\espWidth,-7.8) coordinate (#1-3v3)
+    \markgeocoordinate {#1}
+    {(#1-origin)} {(#1-origin) ++(\espWidth,-\espHeight)}
+    {(#1-origin)} {(#1-origin) ++(\espWidth,-\espHeight)}
 }
 
 \ctikzsubcircuitactivate{spicesp}
