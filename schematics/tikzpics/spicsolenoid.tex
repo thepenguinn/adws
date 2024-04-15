@@ -12,6 +12,9 @@
 \def\solenoidPinHoleThickness{0.07}
 
 \ctikzsubcircuitdef{spicsolenoid} {
+    north, south, east, west,
+    northeast, northwest, southeast, southwest,
+    center,
     vcc, gnd%
 } {
     coordinate (#1-origin)
@@ -74,6 +77,13 @@
     )
     ++(0.4,0) coordinate (#1-vcc)
     ++(0.5,0) coordinate (#1-gnd)
+    \markgeocoordinate {#1}
+    {(#1-origin)} {
+        (#1-origin) ++({\solenoidMotorWidth/2},{(-\solenoidMotorHeight-\solenoidBoardHeight)/2})
+    }
+    {(#1-origin)} {
+        (#1-origin) ++({\solenoidMotorWidth/2},{(-\solenoidMotorHeight-\solenoidBoardHeight)/2})
+    }
 }
 
 \ctikzsubcircuitactivate{spicsolenoid}
