@@ -6,31 +6,9 @@ return {
         ["lmodt"] = 1713171408,
         ["style"] = "default",
     },
-    ["spicdht"] = {
-        ["child_nodes"] = {
-            ["epicdht"] = true,
-        },
-        ["default_build_child_nodes"] = {
-            ["epicdht"] = true,
-        },
-        ["lmodt"] = 1713178735,
-        ["parent_nodes"] = {
-        },
-    },
-    ["epicpanel"] = {
-        ["parent_nodes"] = {
-            ["spicpanel"] = true,
-        },
-        ["lmodt"] = 1713173270,
-        ["style"] = "default",
-    },
-    ["epicpowerconsumptionblock"] = {
-        ["parent_nodes"] = {
-        },
-        ["lmodt"] = 1711891230,
-        ["style"] = "default",
-    },
     ["spicpump"] = {
+        ["parent_nodes"] = {
+        },
         ["child_nodes"] = {
             ["epicpump"] = true,
         },
@@ -38,40 +16,6 @@ return {
             ["epicpump"] = true,
         },
         ["lmodt"] = 1713178672,
-        ["parent_nodes"] = {
-        },
-    },
-    ["epicsolenoid"] = {
-        ["parent_nodes"] = {
-            ["spicsolenoid"] = true,
-        },
-        ["lmodt"] = 1713093316,
-        ["style"] = "default",
-    },
-    ["epicrelay"] = {
-        ["parent_nodes"] = {
-            ["spicrelay"] = true,
-        },
-        ["lmodt"] = 1712922096,
-        ["style"] = "default",
-    },
-    ["epicdht"] = {
-        ["parent_nodes"] = {
-            ["spicdht"] = true,
-        },
-        ["lmodt"] = 1713089742,
-        ["style"] = "default",
-    },
-    ["spicesp"] = {
-        ["child_nodes"] = {
-            ["epicesp"] = true,
-        },
-        ["default_build_child_nodes"] = {
-            ["epicesp"] = true,
-        },
-        ["lmodt"] = 1713178284,
-        ["parent_nodes"] = {
-        },
     },
     ["endtest"] = {
         ["parent_nodes"] = {
@@ -80,44 +24,28 @@ return {
         ["lmodt"] = 1711953684,
         ["style"] = "default",
     },
-    ["spicpanel"] = {
+    ["epicpowerconsumptionblock"] = {
+        ["parent_nodes"] = {
+        },
+        ["lmodt"] = 1711891230,
+        ["style"] = "default",
+    },
+    ["spicdht"] = {
+        ["parent_nodes"] = {
+        },
         ["child_nodes"] = {
-            ["epicpanel"] = true,
+            ["epicdht"] = true,
         },
         ["default_build_child_nodes"] = {
-            ["epicpanel"] = true,
+            ["epicdht"] = true,
         },
-        ["lmodt"] = 1713179214,
-        ["parent_nodes"] = {
-        },
+        ["lmodt"] = 1713178735,
     },
-    ["spicsolenoid"] = {
-        ["child_nodes"] = {
-            ["epicsolenoid"] = true,
-        },
-        ["default_build_child_nodes"] = {
-            ["epicsolenoid"] = true,
-        },
-        ["lmodt"] = 1713179100,
+    ["epicpanel"] = {
         ["parent_nodes"] = {
+            ["spicpanel"] = true,
         },
-    },
-    ["spiccell"] = {
-        ["child_nodes"] = {
-            ["epiccell"] = true,
-        },
-        ["default_build_child_nodes"] = {
-            ["epiccell"] = true,
-        },
-        ["lmodt"] = 1713175311,
-        ["parent_nodes"] = {
-        },
-    },
-    ["epicpump"] = {
-        ["parent_nodes"] = {
-            ["spicpump"] = true,
-        },
-        ["lmodt"] = 1713071436,
+        ["lmodt"] = 1713173270,
         ["style"] = "default",
     },
     ["epicesp"] = {
@@ -127,36 +55,34 @@ return {
         ["lmodt"] = 1712842796,
         ["style"] = "default",
     },
-    ["epiccell"] = {
+    ["epicpump"] = {
         ["parent_nodes"] = {
-            ["spiccell"] = true,
+            ["spicpump"] = true,
         },
-        ["lmodt"] = 1713175231,
+        ["lmodt"] = 1713071436,
         ["style"] = "default",
     },
-    ["subtest"] = {
-        ["child_nodes"] = {
-            ["endtest"] = true,
-        },
-        ["default_build_child_nodes"] = {
-            ["endtest"] = true,
-        },
-        ["lmodt"] = 1711953162,
+    ["spiccell"] = {
         ["parent_nodes"] = {
         },
-    },
-    ["spicbms"] = {
         ["child_nodes"] = {
-            ["epicbms"] = true,
+            ["epiccell"] = true,
         },
         ["default_build_child_nodes"] = {
-            ["epicbms"] = true,
+            ["epiccell"] = true,
         },
         ["lmodt"] = 1713175311,
+    },
+    ["epicsolenoid"] = {
         ["parent_nodes"] = {
+            ["spicsolenoid"] = true,
         },
+        ["lmodt"] = 1713093316,
+        ["style"] = "default",
     },
     ["spicrelay"] = {
+        ["parent_nodes"] = {
+        },
         ["child_nodes"] = {
             ["epicrelay"] = true,
         },
@@ -164,7 +90,81 @@ return {
             ["epicrelay"] = true,
         },
         ["lmodt"] = 1713178516,
+    },
+    ["spicbms"] = {
         ["parent_nodes"] = {
         },
+        ["child_nodes"] = {
+            ["epicbms"] = true,
+        },
+        ["default_build_child_nodes"] = {
+            ["epicbms"] = true,
+        },
+        ["lmodt"] = 1713179380,
+    },
+    ["subtest"] = {
+        ["parent_nodes"] = {
+        },
+        ["child_nodes"] = {
+            ["endtest"] = true,
+        },
+        ["default_build_child_nodes"] = {
+            ["endtest"] = true,
+        },
+        ["lmodt"] = 1711953162,
+    },
+    ["spicsolenoid"] = {
+        ["parent_nodes"] = {
+        },
+        ["child_nodes"] = {
+            ["epicsolenoid"] = true,
+        },
+        ["default_build_child_nodes"] = {
+            ["epicsolenoid"] = true,
+        },
+        ["lmodt"] = 1713179100,
+    },
+    ["epicrelay"] = {
+        ["parent_nodes"] = {
+            ["spicrelay"] = true,
+        },
+        ["lmodt"] = 1712922096,
+        ["style"] = "default",
+    },
+    ["spicpanel"] = {
+        ["parent_nodes"] = {
+        },
+        ["child_nodes"] = {
+            ["epicpanel"] = true,
+        },
+        ["default_build_child_nodes"] = {
+            ["epicpanel"] = true,
+        },
+        ["lmodt"] = 1713179298,
+    },
+    ["epiccell"] = {
+        ["parent_nodes"] = {
+            ["spiccell"] = true,
+        },
+        ["lmodt"] = 1713175231,
+        ["style"] = "default",
+    },
+    ["spicesp"] = {
+        ["parent_nodes"] = {
+        },
+        ["child_nodes"] = {
+            ["epicesp"] = true,
+        },
+        ["default_build_child_nodes"] = {
+            ["epicesp"] = true,
+        },
+        ["lmodt"] = 1713178284,
+    },
+    ["epicdht"] = {
+        ["parent_nodes"] = {
+            ["spicdht"] = true,
+        },
+        ["lmodt"] = 1713089742,
+        ["style"] = "default",
     },
 }
