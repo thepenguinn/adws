@@ -1,10 +1,12 @@
-\def\solenoidMotorWidth{3}
+\def\solenoidMotorWidth{4}
 \def\solenoidMotorHeight{1.5}
-\def\solenoidBoardWidth{2}
+\def\solenoidBoardWidth{2.5}
 \def\solenoidBoardHeight{1}
 
 \def\solenoidBvlX{0.3}
 \def\solenoidBvlY{0.2}
+
+\def\solenoidBoardOffset{0.15}
 
 \def\solenoidBoardBvlX{0.5}
 \def\solenoidBoardBvlY{0.5}
@@ -50,7 +52,8 @@
             ;
             %% board
             \draw [very thick, rounded corners = 1mm]
-            (mid) ++({\solenoidBoardWidth/2},-\solenoidMotorHeight)
+            (mid) ++(-\solenoidBoardOffset,0) coordinate (boardmid)
+            (boardmid) ++({\solenoidBoardWidth/2},-\solenoidMotorHeight)
             -- ++(0,{-\solenoidBoardHeight+\solenoidBoardBvlY})
             -- ++(-\solenoidBoardBvlX,-\solenoidBoardBvlY)
             -- ++({-\solenoidBoardWidth+\solenoidBoardBvlX},0)
@@ -59,7 +62,7 @@
             %% inputs
             \draw
             (origin) ++(
-            {(\solenoidMotorWidth-\solenoidBoardWidth)/2},
+            {((\solenoidMotorWidth-\solenoidBoardWidth)/2)-\solenoidBoardOffset},
             {-\solenoidMotorHeight-\solenoidBoardHeight}
             )
             ++(0.4,0.25)
@@ -72,7 +75,7 @@
         \end{tikzpicture}
     }
     (#1-origin) ++(
-    {(\solenoidMotorWidth-\solenoidBoardWidth)/2},
+    {((\solenoidMotorWidth-\solenoidBoardWidth)/2)-\solenoidBoardOffset},
     {-\solenoidMotorHeight-\solenoidBoardHeight}
     )
     ++(0.4,0) coordinate (#1-vcc)
