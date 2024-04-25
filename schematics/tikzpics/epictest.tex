@@ -1,0 +1,23 @@
+\begin{tikzpicture}
+    \draw
+    (0,0) coordinate (origin)
+
+    (origin) \spicesp      {esp}      {center}
+    (origin) \spicrelay    {relay}    {center}
+    (origin) \spicpump     {pump}     {center}
+    (origin) \spicdht      {dht}      {center}
+    (origin) \spicsolenoid {solenoid} {center}
+    (origin) \spicpanel    {panel}    {center}
+    (origin) \spicbms      {bms}      {center}
+    (origin) \spiccell     {cell}     {center}
+
+    %% \spicesp {esp} {center} (esp-center) ++(10,0)
+    %% \spicrelay {relay} {center} (relay-center) ++(10,0)
+    %% \spicpump {pump} {center} (pump-center) ++(10,0)
+    %% \spicdht {dht} {center} (dht-center) ++(0,-10)
+    %% \spicsolenoid {solenoid} {center} (solenoid-center) ++(-10,0)
+    %% \spicpanel {panel} {center} (panel-center) ++(-10,0)
+    %% \spicbms {bms} {center} (bms-center) ++(-10,0)
+    %% \spiccell {cell} {center} (cell-center) ++(-10,0)
+    ;
+\end{tikzpicture}
