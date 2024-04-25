@@ -1,71 +1,29 @@
 return {
-    ["spicsolenoid"] = {
-        ["default_build_child_nodes"] = {
-            ["epicsolenoid"] = true,
-        },
+    ["spicesp"] = {
         ["child_nodes"] = {
-            ["epicsolenoid"] = true,
+            ["epicesp"] = true,
+            ["epictest"] = true,
         },
         ["parent_nodes"] = {
         },
-        ["lmodt"] = 1713179100,
-    },
-    ["spicbms"] = {
         ["default_build_child_nodes"] = {
-            ["epicbms"] = true,
+            ["epicesp"] = true,
+            ["epictest"] = true,
         },
+        ["lmodt"] = 1713178284,
+    },
+    ["spicrelay"] = {
         ["child_nodes"] = {
-            ["epicbms"] = true,
+            ["epicrelay"] = true,
+            ["epictest"] = true,
         },
         ["parent_nodes"] = {
         },
-        ["lmodt"] = 1713179596,
-    },
-    ["epicrelay"] = {
-        ["style"] = "default",
-        ["parent_nodes"] = {
-            ["spicrelay"] = true,
-        },
-        ["lmodt"] = 1712922096,
-    },
-    ["spicdht"] = {
         ["default_build_child_nodes"] = {
-            ["epicdht"] = true,
+            ["epicrelay"] = true,
+            ["epictest"] = true,
         },
-        ["child_nodes"] = {
-            ["epicdht"] = true,
-        },
-        ["parent_nodes"] = {
-        },
-        ["lmodt"] = 1713178735,
-    },
-    ["epicpump"] = {
-        ["style"] = "default",
-        ["parent_nodes"] = {
-            ["spicpump"] = true,
-        },
-        ["lmodt"] = 1713071436,
-    },
-    ["epiccell"] = {
-        ["style"] = "default",
-        ["parent_nodes"] = {
-            ["spiccell"] = true,
-        },
-        ["lmodt"] = 1713175231,
-    },
-    ["epicsolenoid"] = {
-        ["style"] = "default",
-        ["parent_nodes"] = {
-            ["spicsolenoid"] = true,
-        },
-        ["lmodt"] = 1713093316,
-    },
-    ["epicesp"] = {
-        ["style"] = "default",
-        ["parent_nodes"] = {
-            ["spicesp"] = true,
-        },
-        ["lmodt"] = 1712842796,
+        ["lmodt"] = 1713182521,
     },
     ["epicdht"] = {
         ["style"] = "default",
@@ -74,12 +32,25 @@ return {
         },
         ["lmodt"] = 1713089742,
     },
-    ["epicbms"] = {
+    ["spiccell"] = {
+        ["child_nodes"] = {
+            ["epictest"] = true,
+            ["epiccell"] = true,
+        },
+        ["parent_nodes"] = {
+        },
+        ["default_build_child_nodes"] = {
+            ["epictest"] = true,
+            ["epiccell"] = true,
+        },
+        ["lmodt"] = 1713179632,
+    },
+    ["epicpump"] = {
         ["style"] = "default",
         ["parent_nodes"] = {
-            ["spicbms"] = true,
+            ["spicpump"] = true,
         },
-        ["lmodt"] = 1713171408,
+        ["lmodt"] = 1714049668,
     },
     ["endtest"] = {
         ["style"] = "default",
@@ -88,34 +59,57 @@ return {
         },
         ["lmodt"] = 1711953684,
     },
-    ["epicpanel"] = {
+    ["epictest"] = {
         ["style"] = "default",
         ["parent_nodes"] = {
+            ["spicesp"] = true,
+            ["spicdht"] = true,
+            ["spicrelay"] = true,
+            ["spicbms"] = true,
+            ["spiccell"] = true,
+            ["spicsolenoid"] = true,
+            ["spicpump"] = true,
             ["spicpanel"] = true,
         },
-        ["lmodt"] = 1713173270,
+        ["lmodt"] = 1713738947,
     },
-    ["spicpump"] = {
-        ["default_build_child_nodes"] = {
-            ["epicpump"] = true,
-        },
+    ["spicsolenoid"] = {
         ["child_nodes"] = {
-            ["epicpump"] = true,
+            ["epictest"] = true,
+            ["epicsolenoid"] = true,
         },
         ["parent_nodes"] = {
         },
-        ["lmodt"] = 1713178672,
-    },
-    ["spicrelay"] = {
         ["default_build_child_nodes"] = {
-            ["epicrelay"] = true,
+            ["epictest"] = true,
+            ["epicsolenoid"] = true,
         },
+        ["lmodt"] = 1713676044,
+    },
+    ["epicesp"] = {
+        ["style"] = "default",
+        ["parent_nodes"] = {
+            ["spicesp"] = true,
+        },
+        ["lmodt"] = 1712842796,
+    },
+    ["subtest"] = {
         ["child_nodes"] = {
-            ["epicrelay"] = true,
+            ["endtest"] = true,
         },
         ["parent_nodes"] = {
         },
-        ["lmodt"] = 1713178516,
+        ["default_build_child_nodes"] = {
+            ["endtest"] = true,
+        },
+        ["lmodt"] = 1711953162,
+    },
+    ["epicrelay"] = {
+        ["style"] = "default",
+        ["parent_nodes"] = {
+            ["spicrelay"] = true,
+        },
+        ["lmodt"] = 1712922096,
     },
     ["epicpowerconsumptionblock"] = {
         ["style"] = "default",
@@ -123,48 +117,83 @@ return {
         },
         ["lmodt"] = 1711891230,
     },
-    ["spicesp"] = {
-        ["default_build_child_nodes"] = {
-            ["epicesp"] = true,
-        },
-        ["child_nodes"] = {
-            ["epicesp"] = true,
-        },
-        ["parent_nodes"] = {
-        },
-        ["lmodt"] = 1713178284,
-    },
     ["spicpanel"] = {
-        ["default_build_child_nodes"] = {
+        ["child_nodes"] = {
+            ["epictest"] = true,
             ["epicpanel"] = true,
         },
-        ["child_nodes"] = {
+        ["parent_nodes"] = {
+        },
+        ["default_build_child_nodes"] = {
+            ["epictest"] = true,
             ["epicpanel"] = true,
         },
-        ["parent_nodes"] = {
-        },
-        ["lmodt"] = 1713179449,
+        ["lmodt"] = 1713678535,
     },
-    ["spiccell"] = {
-        ["default_build_child_nodes"] = {
-            ["epiccell"] = true,
-        },
-        ["child_nodes"] = {
-            ["epiccell"] = true,
-        },
+    ["epicsolenoid"] = {
+        ["style"] = "default",
         ["parent_nodes"] = {
+            ["spicsolenoid"] = true,
         },
-        ["lmodt"] = 1713179632,
+        ["lmodt"] = 1713093316,
     },
-    ["subtest"] = {
-        ["default_build_child_nodes"] = {
-            ["endtest"] = true,
+    ["epicpanel"] = {
+        ["style"] = "default",
+        ["parent_nodes"] = {
+            ["spicpanel"] = true,
         },
+        ["lmodt"] = 1713173270,
+    },
+    ["spicbms"] = {
         ["child_nodes"] = {
-            ["endtest"] = true,
+            ["epictest"] = true,
+            ["epicbms"] = true,
         },
         ["parent_nodes"] = {
         },
-        ["lmodt"] = 1711953162,
+        ["default_build_child_nodes"] = {
+            ["epictest"] = true,
+            ["epicbms"] = true,
+        },
+        ["lmodt"] = 1713179707,
+    },
+    ["epiccell"] = {
+        ["style"] = "default",
+        ["parent_nodes"] = {
+            ["spiccell"] = true,
+        },
+        ["lmodt"] = 1713175231,
+    },
+    ["epicbms"] = {
+        ["style"] = "default",
+        ["parent_nodes"] = {
+            ["spicbms"] = true,
+        },
+        ["lmodt"] = 1713171408,
+    },
+    ["spicpump"] = {
+        ["child_nodes"] = {
+            ["epictest"] = true,
+            ["epicpump"] = true,
+        },
+        ["parent_nodes"] = {
+        },
+        ["default_build_child_nodes"] = {
+            ["epicpump"] = true,
+        },
+        ["lmodt"] = 1714049590,
+    },
+    ["spicdht"] = {
+        ["child_nodes"] = {
+            ["epictest"] = true,
+            ["epicdht"] = true,
+        },
+        ["parent_nodes"] = {
+        },
+        ["default_build_child_nodes"] = {
+            ["epictest"] = true,
+            ["epicdht"] = true,
+        },
+        ["lmodt"] = 1713178735,
     },
 }

@@ -1,8 +1,24 @@
-%% this defs are stupid
-\def\pumpBoardHeight{2.5}
+\def\pumpBoardHeight{2.25}
 \def\pumpBoardWidth{4}
-\def\pumpMotorHeight{3.5}
-\def\pumpMotorWidth{3}
+
+\def\pumpBoardYOff{2.25}
+
+\def\pumpInXOff{-0.5}
+
+\def\pumpBoardBvlX{0.75}
+\def\pumpBoardBvlY{0.75}
+
+\def\pumpMotorBvlX{0.3}
+\def\pumpMotorBvlY{0.6}
+
+\def\pumpMotorInBvlX{0.2}
+\def\pumpMotorInBvlY{0.5}
+
+\def\pumpMoterInGap{0.565}
+
+\def\pumpMotorHeight{3.25}
+\def\pumpMotorWidth{2.75}
+
 \def\pumpPinHoleThickness{0.07}
 
 \ctikzsubcircuitdef{spicpump} {
@@ -12,7 +28,7 @@
     vcc, gnd%
 } {
     coordinate (#1-origin)
-    ++(2,-2.25)
+    ++({\pumpBoardWidth/2},{-((\pumpBoardYOff+\pumpBoardHeight)/2)})
     node [inner sep = 0pt, anchor = center] {
         \begin{tikzpicture}
             %% markings
@@ -22,19 +38,19 @@
             ($(origin)!0.5!(rightend)$) coordinate (mid)
             ;
             %% motor
-            \draw [semithick, rounded corners = 0.5mm]
-            (mid) -- ++(-1.2,0)
-            -- ++(-0.3,-0.4)
-            -- ++(0,-2.7)
-            -- ++(0.3,-0.4)
-            -- ++(1.2,0)
+            \draw [semithick, rounded corners = 1.5mm]
+            (mid) -- ++({(-\pumpMotorWidth/2)+\pumpMotorBvlX},0)
+            -- ++(-\pumpMotorBvlX,-\pumpMotorBvlY)
+            -- ++(0,{(-\pumpMotorHeight)+(\pumpMotorBvlY*2)})
+            -- ++(\pumpMotorBvlX,-\pumpMotorBvlY)
+            -- ++({(\pumpMotorWidth/2)-\pumpMotorBvlX},0)
             ;
-            \draw [semithick, rounded corners = 0.5mm]
-            (mid) -- ++(1.2,0)
-            -- ++(0.3,-0.4)
-            -- ++(0,-2.7)
-            -- ++(-0.3,-0.4)
-            -- ++(-1.2,0)
+            \draw [semithick, rounded corners = 1.5mm]
+            (mid) -- ++({(\pumpMotorWidth/2)-\pumpMotorBvlX},0)
+            -- ++(\pumpMotorBvlX,-\pumpMotorBvlY)
+            -- ++(0,{(-\pumpMotorHeight)+(\pumpMotorBvlY*2)})
+            -- ++(-\pumpMotorBvlX,-\pumpMotorBvlY)
+            -- ++({(-\pumpMotorWidth/2)+\pumpMotorBvlX},0)
             ;
             %% inside motor
             \draw [semithick, rounded corners = 1mm]
@@ -42,55 +58,58 @@
             rectangle ++(0.5,{-\pumpMotorHeight+0.5})
             ;
             \draw [semithick, rounded corners = 1mm]
-            (mid) ++(-0.7,-0.25)
+            (mid) ++(-\pumpMoterInGap,-0.25)
             -- ++(-0.3,0)
-            -- ++(-0.2,-0.5)
+            -- ++(-\pumpMotorInBvlX,-\pumpMotorInBvlY)
             -- ++(0,{-\pumpMotorHeight+0.5+1})
-            -- ++(0.2,-0.5)
+            -- ++(\pumpMotorInBvlX,-\pumpMotorInBvlY)
             -- ++(0.3,0)
             -- cycle
             ;
             \draw [semithick, rounded corners = 1mm]
-            (mid) ++(0.7,-0.25)
+            (mid) ++(\pumpMoterInGap,-0.25)
             -- ++(0.3,0)
-            -- ++(0.2,-0.5)
+            -- ++(\pumpMotorInBvlX,-\pumpMotorInBvlY)
             -- ++(0,{-\pumpMotorHeight+0.5+1})
-            -- ++(-0.2,-0.5)
+            -- ++(-\pumpMotorInBvlX,-\pumpMotorInBvlY)
             -- ++(-0.3,0)
             -- cycle
             ;
             \draw [very thick, rounded corners = 1mm]
-            (mid) ++(0,-2) coordinate (boardtopheight)
-            (boardtopheight) ++(-1.5,0) coordinate (boardstart)
-            (boardtopheight) ++(1.5,0) coordinate (boardend)
-            (boardtopheight) ++(0,-\pumpBoardHeight) coordinate (boardbotheight)
-            %% drawing board
-            (boardstart) -- (origin|-boardtopheight)
-            -- ++(0,{-\pumpBoardHeight+0.75}) % beveled
-            -- ++(0.75,-0.75)
-            -- ++({\pumpBoardWidth-0.75},0)
-            -- (rightend|-boardtopheight)
-            -- (boardend)
+            (mid) ++({-\pumpMotorWidth/2},-\pumpBoardYOff)
+            -- ++({-(\pumpBoardWidth-\pumpMotorWidth)/2},0)
+            -- ++(0,{-(\pumpBoardHeight-\pumpBoardBvlY)})
+            -- ++(\pumpBoardBvlX,-\pumpBoardBvlY)
+            -- ++({((\pumpBoardWidth/2)-\pumpBoardBvlX)},0)
+            ;
+            \draw [very thick, rounded corners = 1mm]
+            (mid) ++({\pumpMotorWidth/2},-\pumpBoardYOff)
+            -- ++({(\pumpBoardWidth-\pumpMotorWidth)/2},0)
+            -- ++(0,{-(\pumpBoardHeight-\pumpBoardBvlY)})
+            -- ++(-\pumpBoardBvlX,-\pumpBoardBvlY)
+            -- ++({-((\pumpBoardWidth/2)-\pumpBoardBvlX)},0)
             ;
             %% drawing inputs
             \draw
-            (origin) ++(\pumpBoardWidth,0) coordinate (tmp)
-            (tmp|-boardbotheight)
-            ++(-0.5,0.25)
+            (mid) ++(0,{-(\pumpBoardYOff+\pumpBoardHeight)})
+            ++({-0.25+\pumpInXOff},0.25)
             circle (\pumpPinHoleThickness)
             node [above = 4pt, font = \tiny, scale = 0.8] {\texttt{GND}}
-            ++(-0.5,0)
+            ++(0.5,0)
             circle (\pumpPinHoleThickness)
             node [above = 4pt, font = \tiny, scale = 0.8] {\texttt{VCC}}
             ;
         \end{tikzpicture}
     }
-    (#1-origin) ++(0,{-\pumpMotorHeight+1.5}) ++(\pumpBoardWidth,-\pumpBoardHeight)
-    ++(-0.5,0) coordinate (#1-gnd)
-    ++(-0.5,0) coordinate (#1-vcc)
+    (#1-origin) ++({\pumpBoardWidth/2},0) coordinate (#1-mid)
+    (#1-mid) ++(0,{-(\pumpBoardYOff+\pumpBoardHeight)})
+    ++({-0.25+\pumpInXOff},0) coordinate (#1-gnd)
+    ++(0.5,0) coordinate (#1-vcc)
     \markgeocoordinate {#1}
-    {(#1-origin)} {(#1-origin) ++(4,-4.5)}
-    {(#1-origin)} {(#1-origin) ++(4,-4.5)}
+    {(#1-origin)}
+    {(#1-origin) ++({\pumpBoardWidth},{-(\pumpBoardYOff+\pumpBoardHeight)})}
+    {(#1-origin)}
+    {(#1-origin) ++({\pumpBoardWidth},{-(\pumpBoardYOff+\pumpBoardHeight)})}
 }
 
 \ctikzsubcircuitactivate{spicpump}

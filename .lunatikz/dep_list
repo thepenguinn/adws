@@ -1,5 +1,14 @@
 return {
-    ["epiccell"] = {
+    ["spiccell"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["spicpump"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["spicpanel"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["epictest"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
     ["epicpowerconsumptionblock"] = {
@@ -8,46 +17,40 @@ return {
     ["epicesp"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
-    ["epicpump"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
-    ["spicpanel"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
-    ["epicdht"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
-    ["epicsolenoid"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
-    ["epicrelay"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
-    ["epicbms"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
-    ["epicpanel"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
-    ["spiccell"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
-    ["spicesp"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
-    ["spicpump"] = {
-        ["parent_dir"] = "schematics/tikzpics",
-    },
     ["spicsolenoid"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
     ["spicbms"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
-    ["spicrelay"] = {
+    ["epicpanel"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["epiccell"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["epicpump"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
     ["spicdht"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["spicrelay"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["spicesp"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["epicbms"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["epicsolenoid"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["epicdht"] = {
+        ["parent_dir"] = "schematics/tikzpics",
+    },
+    ["epicrelay"] = {
         ["parent_dir"] = "schematics/tikzpics",
     },
 }
