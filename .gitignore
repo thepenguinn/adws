@@ -5,3 +5,4 @@
 *.toc
 test.py
 test.tex
+.lunatikz/dep_cache
